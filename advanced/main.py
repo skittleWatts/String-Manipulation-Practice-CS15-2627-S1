@@ -13,6 +13,7 @@ def format_name(string_to_process: str) -> str:
     string_to_process = "".join(list_to_process)
     return string_to_process
 
+
 def format_title(string_to_process: str) -> str:
     """
     Takes a string and formats it like a title.
@@ -25,6 +26,7 @@ def format_title(string_to_process: str) -> str:
     string_to_process = string_to_process.title()
     return string_to_process
 
+
 def format_list(string_to_process: str) -> str:
     """
     Takes a string and formats it like a list.
@@ -34,6 +36,7 @@ def format_list(string_to_process: str) -> str:
     string_to_process = string_to_process.replace(",", " | ")
     string_to_process = string_to_process.upper()
     return string_to_process
+
 
 def process_numbers(numbers_to_process: str) -> str:
     """
@@ -51,20 +54,35 @@ def process_numbers(numbers_to_process: str) -> str:
     avg = total / len(list_to_process)
     return f"The total is: {total}. The average is {avg}."
 
-print("""
-How would you like to process the string?
 
-1. Format a name.
-2. Format a title.
-3. Format a list.
-4. Process numbers.
+while True:
+    print("""
+    How would you like to process the string?
 
-Enter your choice:
-""")
+    1. Format a name.
+    2. Format a title.
+    3. Format a list.
+    4. Process numbers.
 
-user_choice = int(input())
+    Enter your choice:
+    """)
 
-string_to_process = input("Enter the string to process: ")
+    try:
+        user_choice = int(input())
+    except ValueError:
+        print("Please enter a valid input!")
+        continue
 
-if user_choice  == 1:
-    print(f"")
+    if user_choice in [1, 2, 3, 4]:
+        user_string = input("Enter the string to process: ")
+
+        if user_choice == 1:
+            print(format_name(user_string))
+        elif user_choice == 2:
+            print(format_title(user_string))
+        elif user_choice == 3:
+            print(format_list(user_string))
+        else:
+            print(process_numbers(user_string))
+    else:
+        print("Please select an option from 1 to 4!")
